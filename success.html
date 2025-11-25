@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="success.css">
+  <link rel="icon" type="image/jpeg" href="cursedclient.jpg">
+  <title>Cursed Client</title>
+</head>
+<body>
+  <!-- Cursor trail elements will be dynamically added here -->
+  <section>
+    <div class="content-box">
+      <h1>Cursed Client</h1>
+      <h2>Cross-Version Minecraft utility mod!</h2>
+      <p>Cursed Client is a multifunctional modification for Minecraft with many useful utilities.</p>
+      <div class="feature-text">(like ghost client)</div>
+      <p>Supports almost all versions of Minecraft!</p>
+      <!-- From Uiverse.io by satyamchaudharydev --> 
+      <div class="button" data-tooltip="Size: 267Kb" onclick="downloadClient()">
+        <div class="button-wrapper">
+          <div class="text">Download</div>
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path></svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function downloadClient() {
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = 'Cursed-b1.1.jar';
+      link.download = 'Cursed-b1.1.jar';
+      link.style.display = 'none';
+      
+      // Add to the document
+      document.body.appendChild(link);
+      
+      // Trigger the download
+      link.click();
+      
+      // Remove the link
+      document.body.removeChild(link);
+    }
+
+    // Create cursor trail effect
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create cursor trail elements
+      for (let i = 0; i < 3; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        document.body.appendChild(trail);
+      }
+
+      // Track cursor movement
+      const trails = document.querySelectorAll('.cursor-trail');
+      let mouseX = 0;
+      let mouseY = 0;
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      // Animate cursor trails
+      function animateTrails() {
+        trails.forEach((trail, index) => {
+          const speed = 0.1 + (index * 0.05);
+          const x = parseFloat(trail.style.left || 0);
+          const y = parseFloat(trail.style.top || 0);
+          
+          const newX = x + (mouseX - x) * speed;
+          const newY = y + (mouseY - y) * speed;
+          
+          trail.style.left = newX + 'px';
+          trail.style.top = newY + 'px';
+        });
+        
+        requestAnimationFrame(animateTrails);
+      }
+      
+      animateTrails();
+    });
+  </script>
+</body>
+</html>
